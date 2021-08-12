@@ -1,0 +1,63 @@
+﻿
+@model IEnumerable<InAndOut.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Borrowed Items List</h2>
+        </div>
+        <div class="col-6" align="right">
+            <a asp-controller="Item" asp-action="Create" class="btn btn-primary text-white w-50">Create</a>
+        </div>
+    </div>
+
+    @if(Model.Count() > 0)
+    {
+
+    <table class="table table-bordered table-striped" style="width:100%" >
+        <thead>
+            <tr align="center">
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    Borrower
+                </th>
+                <th>
+                    Lender
+                </th>
+                <th>
+                    Update/Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) { 
+            <tr>
+                <td width="23%" style="text-align: center; vertical-align: middle">@item.ItemName</td>
+                <td width="23%" style="text-align: center; vertical-align: middle">@item.Borrower</td>
+                <td width="23%" style="text-align: center; vertical-align: middle">@item.Lender</td>
+                <td width="21%" style="text-align: center; vertical-align: middle">
+                        <a asp-controller="Item" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-outline-primary">Update</a>
+                        <a asp-controller="Item" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+
+    </table>    
+    }
+    else
+    {
+        <p>No items created yet...</p>
+    }
+
+
+    
+
+</div>
